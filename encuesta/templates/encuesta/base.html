@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<style>
+ body {
+    background-color: rgb(206, 33, 33);
+    padding: 0;
+    margin:0;
+}
+
+/* position element in the middle */
+.middle1 {
+    position: absolute;
+    top:12%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+} 
+
+
+/* Ratio: height/width */ 
+:root {
+    --ratio: 0.5;
+    --reverse-ratio: 2;
+    --container-width: 100vw;
+    --container-height: 100vh;
+
+    --font1-sizeVW: 15vh;
+    --font1-sizeVH: calc(var(--ratio) * 15vw);
+
+    --font2-sizeVW: 6vh;
+    --font2-sizeVH: calc(var(--ratio) * 6vw);
+
+    --font3-sizeVW: 3vh;
+    --font3-sizeVH: calc(var(--ratio) * 3vw);
+
+}
+
+
+#container1 {
+background-color: rgb(138, 109, 13);
+width: var(--container-width);
+height: calc(var(--ratio) * var(--container-width));
+
+max-width: var(--container-width);  
+max-height: calc( 0.15 * var(--container-height));
+top: 100%;
+}
+
+#span1 {
+    font-size: var(--font1-sizeVW);   
+}
+
+#span2 {
+    font-size: var(--font2-sizeVW);
+}
+
+/* max-width: (reversRatio * 100vh) */
+@media all and (max-width: 200vh) {  
+
+    #container {
+        background-color: green;
+    }
+
+    #span1 {  
+        font-size: var(--font1-sizeVH); 
+    } 
+
+    #span2 {  
+        font-size: var(--font2-sizeVH);
+    } 
+} 
+</style>
+
+<html lang="en">
+  {% load static %}
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <!-- Custom fonts for this template -->
+        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
+        <!-- Custom styles for this template -->
+        <link href="{% static 'css/fondo1.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
+    </head>
+
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
+      <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+              <a class="nav-link" href="{% url 'voto' %}">Encuesta</a>
+            {% else %}
+              <a href="{% url 'iniciar_sesion' %}">Encuesta</a>
+            {% endif %}
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'proyecto' %}">Proyecto</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'contacto' %}">Contactos</a>
+          </li>
+          <li class="nav-item">
+            <hr/>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+              <a class="nav-link" href="/">Hola {{ user.username }}!</a>
+              </li> 
+              <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+              <a class="nav-link" href="{% url 'iniciar_sesion' %}">iniciar_sesion</a>
+              </li>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+
+  </nav>
+
+<!-- Page Header -->
+<div id="container1">
+  <header class="masthead" style="bottom:45vh; top:-90vh; height:120vh;background-image: url('{% static 'images_page/logo1.jpeg' %}');background-position-y: bottom;background-size: 100% 25%;background-attachment: initial">
+    <div class="overlay"></div>
+<!--          <div class="site-heading" style="text-align:center">
+            <span id="span2" >Pares de galaxias</span>
+            <span id="span2" class="subheading">Clasificación de la interación entre pares de galaxias</span>
+          </div>-->
+    </div>
+  </header>
+</div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'js/clean-blog.min.js' %}"></script>
+
+    <div class="encuesta">           
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+</div>
+</html>

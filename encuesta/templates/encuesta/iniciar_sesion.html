@@ -1,0 +1,18 @@
+{% extends 'encuesta/base.html' %}
+
+{% block content %}
+
+<h4> Por favor iniciar sesión antes de realizar la encuesta</h4>
+
+<form method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">iniciar_sesion</button>
+</form>
+
+<hr />
+<div>
+    <a href="/register">Registrar usuario</a>
+</div>
+<a href="{% url "password_reset" %}">Olvidé mi contaseña</a> 
+{% endblock %}
