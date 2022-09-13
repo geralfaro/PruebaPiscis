@@ -1,5 +1,5 @@
 Django==2.2.6
-Pillow==6.2.0
+Pillow==9.0.1
 pytz==2019.2
 sphinx>=1.6.2
 django-nose==1.4.5
